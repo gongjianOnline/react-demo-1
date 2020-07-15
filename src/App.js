@@ -1,46 +1,44 @@
 import React from 'react';
 
-class App extends React.Component {
-  constructor(){
-    super()
+class App extends React.PureComponent {
+  constructor(props){
+    super(props)
     this.state = {
-      num:0,
-      info:{
-        name:'lilei',
-        age:"18"
-      }
+      n:0
     }
+  }; 
+  add= ()=>{
+    this.setState(state=>({
+      n: state.n + 1
+    }));
+    this.setState(state=>({
+      n: state.n - 1
+    }))
   };
-  addFun = ()=>{
-    console.log("123")
-    this.setState({num:this.state.num + 1})
-  }
-  testFun =()=>{
-    this.setState({name:this.state.info.name="tets"})
-  }
+  // shouldComponentUpdate(newProps,newState){ //生命周期函数,用于监听state和props的值是否变化,返回false和true决定是否渲染视图
+  //   return !(newState.n === this.state.n)
+  // }
   render(){
-    return(
-      <div>
-        <p>appComponentVlaue:{this.state.num}</p>
-        <button onClick={this.addFun}>add</button>
-        <button onClick={this.testFun}>修改名称</button>
-        <Child  number={this.state.num} 
-                name={this.state.info.name} 
-                age={this.state.info.age}></Child>
-      </div>
-    )
+    console.log("render")
+    // return(
+      // <>
+      //   App
+      //   <div>{this.state.n}</div>
+      //   <div>
+      //     <button onClick={this.add}>add</button>
+      //   </div>
+      // </>
+    // )
+      
+    if(this.state.n % 2 === 0){
+      return <div>偶数</div>
+    }else{
+      return <span>奇数</span>
+    }
+
+    
   }
 }
 
-class Child extends React.Component{
-  constructor(props){
-    super(props)
-  };
-  render(){
-    return(
-    <div>子组件{this.props.number},姓名{this.props.name},年龄：{this.props.age}</div>
-    )
-  }
-}
 
 export default App
