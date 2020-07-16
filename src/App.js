@@ -1,44 +1,27 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import useUpdate from "./useUpdate"
 
-class App extends React.PureComponent {
-  constructor(props){
-    super(props)
-    this.state = {
-      n:0
-    }
-  }; 
-  add= ()=>{
-    this.setState(state=>({
-      n: state.n + 1
-    }));
-    this.setState(state=>({
-      n: state.n - 1
-    }))
-  };
-  // shouldComponentUpdate(newProps,newState){ //生命周期函数,用于监听state和props的值是否变化,返回false和true决定是否渲染视图
-  //   return !(newState.n === this.state.n)
-  // }
-  render(){
-    console.log("render")
-    // return(
-      // <>
-      //   App
-      //   <div>{this.state.n}</div>
-      //   <div>
-      //     <button onClick={this.add}>add</button>
-      //   </div>
-      // </>
-    // )
-      
-    if(this.state.n % 2 === 0){
-      return <div>偶数</div>
-    }else{
-      return <span>奇数</span>
-    }
 
-    
+const App = (props)=>{ //消除了 this
+  const [n,setN] = useState(0);
+  const onClickN = ()=>{
+    setN(n+1)
   }
+  
+  //调用变化的监听
+  useUpdate(()=>{
+    console.log("n update")
+  },n)
+
+
+
+  return (
+      <div>
+        <div>
+          {n}
+          <button onClick={onClickN}>add</button>
+        </div>
+      </div>
+  )
 }
-
-
 export default App
