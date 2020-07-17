@@ -2,6 +2,15 @@ import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 //useState实现思路
+/**
+ *更改函数实现缺点
+ * 若第一次渲染是n第一个,m是第二个,k是第三个
+ * 则第二次渲染师必须保证顺序完全一致
+ * (app组件中)
+ * if(n%2===1){
+ *      [m,setM] = useState(0)
+ * }
+ * */
 let _state = [];
 let index = 0;
 const myuseState = (value)=>{
