@@ -12,7 +12,9 @@ const myuseState = (value)=>{
     }
     return [_state,setState]
 }
-const render = ()=>ReactDOM.render(<App />, document.getElementById('root'));
+const render = ()=>{
+    return ReactDOM.render(<App />, document.getElementById('root'));
+}
 
 
 function App(){
@@ -30,16 +32,6 @@ function App(){
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
 
 ReactDOM.render(
   <App />,
