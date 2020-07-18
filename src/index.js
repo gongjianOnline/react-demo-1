@@ -1,42 +1,46 @@
-import React, {useReducer, useState} from "react";
+import React, {createContext, useContext, useReducer, useState} from "react";
 import ReactDOM from "react-dom";
 const rootElement = document.getElementById("root");
 
-//出使用reducer
-const initData = {
-    n:0
-}
-const reducer = (state,action)=>{
-    switch (action.type) {
-        case 'add' :
-            return {n: state.n + action.number}
-            break;
-        case 'muti' :
-            return {n:state.n*2}
-            break;
-        default:
-            alert("未知type")
-    }
-}
-
-
-
+const C = createContext(null)
 
 function App(){
-   const [state,dispatch] = useReducer(reducer,initData);
-   const add = ()=>{
-       return dispatch({type:"add",number:1})
-   }
+    const [n,setN] = useState(0)
+    return(
+       <C.Provider value={{n,setN}}>
+           <div className="app">
+               <Baba/>
+           </div>
+       </C.Provider>
+    )
+}
 
-    return (
-        <div className='App'>
-            <h1>n:{state.n}</h1>
-            <button onClick={add}>add</button>
-
+function Baba(){
+    const {n,setN} = useContext(C)
+    return(
+        <div>
+            this is baba n:{n}
+            <Child/>
         </div>
     )
-
 }
+
+function Child(){
+    const {n,setN} = useContext(C)
+    const add = ()=>{
+        setN((state)=>{
+            return state+1
+        })
+    }
+    return(
+        <div>
+            this is Child n:{n}
+            <button onClick={add}>add</button>
+        </div>
+    )
+}
+
+
 
 
 ReactDOM.render(<App />, rootElement);
