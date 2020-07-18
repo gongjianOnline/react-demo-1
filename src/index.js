@@ -2,7 +2,7 @@ import React, {createContext, useContext, useReducer, useState} from "react";
 import ReactDOM from "react-dom";
 const rootElement = document.getElementById("root");
 
-//出使用useContent
+//初使用useContent
 const C = createContext(null)
 
 function App(){
