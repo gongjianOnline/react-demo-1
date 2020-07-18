@@ -11,10 +11,9 @@ const rootElement = document.getElementById("root");
 
 
 function App(){
-
-    const [n,setN] = userState(0)
+    const [n,setN] = useState(0)
     const add =()=>{
-        setN((state)=>{state})
+        setN((state)=>{return state+1})
     }
     useEffect(()=>{
         let id = setInterval(()=>{ //页面初始化的时候调用定时器
