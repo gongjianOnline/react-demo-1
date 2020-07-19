@@ -2,26 +2,25 @@ import React, {createContext, useCallback, useContext, useEffect, useMemo, useRe
 import ReactDOM from "react-dom";
 const rootElement = document.getElementById("root");
 
-//初始useRef
+//初始forwardRef
 function App(){
-    const count = useRef(0)
-    const [n,setN] = useState(0)
-    const [_,set_] = useState(0)
-    const addN =()=>{
-        count.current+=1
-        set_(Math.random())
-    }
+    const buttonRef = useRef(null)
     return (
         <div>
-            <div>
-                ref:{count.current}
-                <button onClick={addN}>addN</button>
-            </div>
-
+            <Button3 ref={buttonRef}>button</Button3>
         </div>
     )
-
 }
+
+const Button3 = React.forwardRef((props,ref)=>{
+    return(
+        <button ref={ref} {...props}></button>
+    )
+})
+
+
+
+
 
 
 
